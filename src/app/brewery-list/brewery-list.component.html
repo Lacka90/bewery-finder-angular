@@ -1,0 +1,10 @@
+<p>brewery-list works!</p>
+
+<div *ngIf="breweries$ | async as breweries">
+  <div *ngFor="let brewery of breweries">
+    <div>
+      <a [routerLink]="['/', brewery.id]">#{{ brewery.id }}</a>
+      <span>{{ brewery.name}} - {{ brewery.city}}</span>
+    </div>
+  </div>
+</div>

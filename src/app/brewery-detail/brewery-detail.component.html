@@ -1,0 +1,9 @@
+<a routerLink="/">Back to list</a>
+
+<div *ngIf="brewery$ | async as brewery; else loading">
+  {{brewery | json}}
+</div>
+
+<ng-template #loading>
+  Brewery loading...
+</ng-template>
