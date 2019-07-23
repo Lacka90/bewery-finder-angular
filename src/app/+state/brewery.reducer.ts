@@ -29,16 +29,20 @@ export interface Brewery {
 }
 
 export interface BreweryStore {
+  loading: boolean;
   list: Brewery[];
 }
 
 export const initialState: BreweryStore = {
+  loading: false,
   list: []
 };
 
 const scoreboardReducer = createReducer(
   initialState,
-  on(breweriesActions.setBreweriesList, (state, { list }) => ({ ...state, list })),
+  on(breweriesActions.getBreweriesListRequest, (state) => ({ ...state, loading: true, list: [] })),
+  on(breweriesActions.getBreweriesListSuccess, (state, { list }) => ({ ...state, list, loading: false })),
+  on(breweriesActions.getBreweriesListFail, (state) => ({ ...state, loading: false })),
 );
 
 export function breweriesReducer(state: BreweryStore | undefined, action: Action) {

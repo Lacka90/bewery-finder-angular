@@ -1,5 +1,9 @@
 <p>brewery-list works!</p>
 
+<p *ngIf="loading$ | async">
+  Loading...
+</p>
+
 <div *ngIf="breweries$ | async as breweries">
   <div *ngFor="let brewery of breweries">
     <div>

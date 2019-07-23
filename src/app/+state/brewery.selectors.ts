@@ -7,3 +7,8 @@ export const selectBreweriesList = createSelector(
   getBreweriesState,
   state => state.list
 );
+
+export const selectBreweriesLoading = createSelector(
+  getBreweriesState,
+  state => state.loading
+);

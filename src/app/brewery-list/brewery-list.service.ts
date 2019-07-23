@@ -1,15 +1,12 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BreweryFacade } from '../+state/brewery.facade';
+import { Injectable } from "@angular/core";
 import { Brewery } from '../+state/brewery.reducer';
 
 @Injectable()
 export class BreweryListService {
-  constructor(private httpClient: HttpClient, private facade: BreweryFacade) {}
+  constructor(private httpClient: HttpClient) {}
 
   getBreweries() {
-    this.httpClient.get<Brewery[]>("https://api.openbrewerydb.org/breweries").subscribe(
-      list => this.facade.setBreweriesList(list)
-    );
+    return this.httpClient.get<Brewery[]>("https://api.openbrewerydb.org/breweries");
   }
 }

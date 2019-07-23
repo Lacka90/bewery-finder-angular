@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { BreweryListService } from "./brewery-list.service";
 import { BreweryFacade } from '../+state/brewery.facade';
 
 @Component({
@@ -9,10 +8,11 @@ import { BreweryFacade } from '../+state/brewery.facade';
 })
 export class BreweryListComponent implements OnInit {
   breweries$ = this.facade.breweriesList$;
+  loading$ = this.facade.breweriesLoading$;
 
-  constructor(private breweryListService: BreweryListService, private facade: BreweryFacade) {}
+  constructor(private facade: BreweryFacade) {}
 
   ngOnInit() {
-    this.breweryListService.getBreweries();
+    this.facade.getBreweriesList();
   }
 }

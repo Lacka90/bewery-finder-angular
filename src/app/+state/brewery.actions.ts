@@ -1,4 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Brewery } from './brewery.reducer';
 
-export const setBreweriesList = createAction('[Brewery] Set Breweries List', props<{ list: Brewery[] }>());
+export const getBreweriesListRequest = createAction('[Brewery] Get Breweries List Request');
+export const getBreweriesListSuccess = createAction('[Brewery] Get Breweries List Success', props<{ list: Brewery[] }>());
+export const getBreweriesListFail = createAction('[Brewery] Get Breweries List Fail', props<{ error: any }>());
