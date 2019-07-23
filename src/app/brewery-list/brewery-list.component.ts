@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BreweryListService } from "./brewery-list.service";
+import { BreweryFacade } from '../+state/brewery.facade';
 
 @Component({
   selector: "app-brewery-list",
@@ -7,9 +8,11 @@ import { BreweryListService } from "./brewery-list.service";
   styleUrls: ["./brewery-list.component.scss"]
 })
 export class BreweryListComponent implements OnInit {
-  breweries$ = this.breweryListService.getBreweries();
+  breweries$ = this.facade.breweriesList$;
 
-  constructor(private breweryListService: BreweryListService) {}
+  constructor(private breweryListService: BreweryListService, private facade: BreweryFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.breweryListService.getBreweries();
+  }
 }
