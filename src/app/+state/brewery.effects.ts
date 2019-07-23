@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom, filter, mapTo } from 'rxjs/operators';
 import { BreweryListService } from '../brewery-list/brewery-list.service';
 import * as breweriesActions from './brewery.actions';
+import { BreweryFacade } from './brewery.facade';
 
 @Injectable()
 export class AppEffects {
@@ -19,5 +20,14 @@ export class AppEffects {
     ),
   );
 
-  constructor(private actions$: Actions, private breweryListService: BreweryListService) {}
+  selectBrewery$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(breweriesActions.selectBrewery),
+      withLatestFrom(this.facade.breweriesList$),
+      filter(([_, list]) => !list || list.length === 0),
+      mapTo(breweriesActions.getBreweriesListRequest())
+    ),
+  );
+
+  constructor(private actions$: Actions, private breweryListService: BreweryListService, private facade: BreweryFacade) {}
 }

@@ -31,11 +31,13 @@ export interface Brewery {
 export interface BreweryStore {
   loading: boolean;
   list: Brewery[];
+  selected: number;
 }
 
 export const initialState: BreweryStore = {
   loading: false,
-  list: []
+  list: [],
+  selected: 0
 };
 
 const scoreboardReducer = createReducer(
@@ -43,6 +45,7 @@ const scoreboardReducer = createReducer(
   on(breweriesActions.getBreweriesListRequest, (state) => ({ ...state, loading: true, list: [] })),
   on(breweriesActions.getBreweriesListSuccess, (state, { list }) => ({ ...state, list, loading: false })),
   on(breweriesActions.getBreweriesListFail, (state) => ({ ...state, loading: false })),
+  on(breweriesActions.selectBrewery, (state, { id }) => ({ ...state, selected: id })),
 );
 
 export function breweriesReducer(state: BreweryStore | undefined, action: Action) {

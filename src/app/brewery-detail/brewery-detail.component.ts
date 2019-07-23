@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { BreweryDetailService } from "./brewery-detail.service";
+import { BreweryFacade } from '../+state/brewery.facade';
 
 @Component({
   selector: "app-brewery-detail",
@@ -8,16 +8,14 @@ import { BreweryDetailService } from "./brewery-detail.service";
   styleUrls: ["./brewery-detail.component.scss"]
 })
 export class BreweryDetailComponent implements OnInit {
-  brewery$ = this.breweryDetailService.getBrewery(
-    this.route.snapshot.params.breweryId
-  );
+  brewery$ = this.facade.selectedBrewery$;
 
   constructor(
     private route: ActivatedRoute,
-    private breweryDetailService: BreweryDetailService
+    private facade: BreweryFacade
   ) {}
 
   ngOnInit() {
-    console.log(this.route);
+    this.facade.selectBrewery(+this.route.snapshot.params.breweryId);
   }
 }

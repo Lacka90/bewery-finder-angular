@@ -12,3 +12,8 @@ export const selectBreweriesLoading = createSelector(
   getBreweriesState,
   state => state.loading
 );
+
+export const selectSelectedBrewery = createSelector(
+  getBreweriesState,
+  state => state.selected > 0 ? state.list.find(elem => elem.id === state.selected) : {}
+);

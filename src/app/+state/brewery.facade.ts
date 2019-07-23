@@ -8,10 +8,15 @@ import * as breweriesSelectors from './brewery.selectors';
 export class BreweryFacade {
   breweriesList$ = this.store.pipe(select(breweriesSelectors.selectBreweriesList));
   breweriesLoading$ = this.store.pipe(select(breweriesSelectors.selectBreweriesLoading));
+  selectedBrewery$ = this.store.pipe(select(breweriesSelectors.selectSelectedBrewery));
 
   constructor(private store: Store<any>) { }
 
   getBreweriesList() {
     this.store.dispatch(breweriesActions.getBreweriesListRequest());
+  }
+
+  selectBrewery(id: number) {
+    this.store.dispatch(breweriesActions.selectBrewery({ id }));
   }
 }
